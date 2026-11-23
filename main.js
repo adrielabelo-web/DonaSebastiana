@@ -48,6 +48,25 @@
     else if (a.parentNode && a.parentNode.tagName === "LI") a.parentNode.hidden = true; // sem endereço, o botão não aparece
   });
 
+  // vídeo da vó: o botão grande dá o play e some; o primeiro play vira evento
+  document.querySelectorAll("[data-video]").forEach(function (cx) {
+    var v = cx.querySelector("video"), bt = cx.querySelector("[data-tocar]"), contou = false;
+    if (!v) return;
+    if (bt) bt.addEventListener("click", function () { v.play(); });
+    v.addEventListener("play", function () {
+      if (bt) bt.hidden = true;
+      if (contou) return; contou = true;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "vsl_play" });
+      if (typeof window.fbq === "function") window.fbq("trackCustom", "VSLPlay");
+    });
+    v.addEventListener("ended", function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "vsl_fim" });
+      if (typeof window.fbq === "function") window.fbq("trackCustom", "VSLFim");
+    });
+  });
+
   // ano do rodapé
   var ano = document.querySelector("[data-ano]");
   if (ano) ano.textContent = new Date().getFullYear();
