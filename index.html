@@ -15,6 +15,7 @@
   <meta property="og:image" content="https://adonasebastiana.com.br/assets/og.jpg">
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/video/vsl-capa.webp" as="image" fetchpriority="high">
   <link rel="preload" href="fonts/alegreya.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script defer src="main.js"></script>
@@ -68,9 +69,17 @@
     <!-- Abertura: a vó com o caderno na mão, botão e preço na primeira tela -->
     <section class="abre" aria-labelledby="titulo-abre">
       <div class="caixa abre__in">
-        <div class="abre__texto">
+        <div class="abre__titulo">
           <p class="etiqueta">O caderninho da vó · mais de 500 receitas</p>
           <h1 id="titulo-abre">Receita das antigas, <em>do jeitinho da vó.</em></h1>
+        </div>
+        <div class="abre__video">
+          <div class="video" data-video>
+            <video src="assets/video/vsl.mp4" poster="assets/video/vsl-capa.webp" width="720" height="1280" controls playsinline preload="none" aria-label="A Dona Sebastiana apresenta o caderninho de receitas"></video>
+            <button class="video__tocar" type="button" data-tocar><span class="video__seta" aria-hidden="true"></span><span>Aperta aqui e ouve a vó</span></button>
+          </div>
+        </div>
+        <div class="abre__texto">
           <p class="abre__fala">Eu sou a Dona Sebastiana. Juntei num caderno só o doce de tacho, a comida de panela, o pão e a cuca da colônia. Comida de verdade, minha filha, com o que tu já tem em casa.</p>
           <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="abre">Quero o caderninho da vó · R$ 9,90 <span aria-hidden="true">→</span></a>
           <ul class="selos">
@@ -80,8 +89,8 @@
           </ul>
         </div>
         <figure class="abre__foto">
-          <img class="abre__vo" src="assets/img/vo-caderno-900.webp" srcset="assets/img/vo-caderno-520.webp 520w, assets/img/vo-caderno-900.webp 900w" sizes="(min-width: 900px) 460px, 86vw" width="900" height="1125" alt="Dona Sebastiana sorrindo na cozinha da roça, abraçada ao caderno de receitas, com o fogão a lenha aceso ao fundo" fetchpriority="high" decoding="async">
-          <img class="abre__capa" src="assets/img/capa-caderninho.webp" width="505" height="825" alt="Capa do Caderno Completo da Dona Sebastiana" decoding="async">
+          <img class="abre__vo" src="assets/img/vo-caderno-900.webp" srcset="assets/img/vo-caderno-520.webp 520w, assets/img/vo-caderno-900.webp 900w" sizes="(min-width: 900px) 420px, 86vw" width="900" height="1125" alt="Dona Sebastiana sorrindo na cozinha da roça, abraçada ao caderno de receitas, com o fogão a lenha aceso ao fundo" loading="lazy" decoding="async">
+          <img class="abre__capa" src="assets/img/capa-caderninho.webp" width="505" height="825" alt="Capa do Caderno Completo da Dona Sebastiana" loading="lazy" decoding="async">
           <figcaption class="bilhete bilhete--foto">Tá tudo aqui, minha filha.</figcaption>
         </figure>
       </div>
