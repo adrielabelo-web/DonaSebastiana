@@ -297,6 +297,24 @@ h1 em, h2 em { font-style: italic; color: var(--cobre-claro); background: linear
 .duvidas summary::after { content: "+"; flex: none; display: grid; place-content: center; width: 34px; height: 34px; border-radius: 50%; background: var(--xadrez); color: #FFF7EC; font-size: 1.5rem; font-weight: 700; line-height: 1; }
 .duvidas details[open] summary::after { content: "\2212"; }
 .duvidas details p { padding: 0 48px 20px 2px; }
+/* ── Abertura com a VSL: título, vídeo, botão e a foto por baixo ── */
+.abre__in { gap: clamp(20px, 3vw, 30px); }
+.abre__titulo { display: grid; gap: 12px; }
+.abre__video { width: min(100%, 380px); justify-self: center; }
+.video { position: relative; aspect-ratio: 9 / 16; border-radius: 22px; overflow: hidden; background: #000 url(assets/video/vsl-capa.webp) center / cover; border: 2px solid var(--cobre); box-shadow: 0 30px 60px -30px #000; }
+.video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.video__tocar { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 20px; border: 0; background: linear-gradient(180deg, rgba(27, 19, 14, .1) 40%, rgba(27, 19, 14, .7)); color: #FFF7EC; font-family: var(--f-texto); font-size: 1.15rem; font-weight: 800; text-shadow: 0 2px 8px #000; cursor: pointer; }
+.video__seta { display: grid; place-content: center; width: 88px; height: 88px; border-radius: 50%; background: var(--xadrez); box-shadow: 0 0 0 8px rgba(255, 247, 236, .22), 0 16px 30px -10px #000; }
+.video__seta::before { content: ""; margin-left: 7px; border-style: solid; border-width: 17px 0 17px 28px; border-color: transparent transparent transparent #FFF7EC; }
+.video__tocar[hidden] { display: none; }
+.abre__foto { margin-top: 10px; }
+@media (min-width: 900px) {
+  .abre__in { grid-template-columns: minmax(0, 6fr) minmax(0, 4fr); grid-template-areas: "titulo video" "texto video" "foto foto"; column-gap: clamp(32px, 5vw, 64px); align-items: start; }
+  .abre__titulo { grid-area: titulo; align-self: end; } .abre__texto { grid-area: texto; align-self: start; align-content: start; }
+  .abre__video { grid-area: video; width: min(100%, 360px); justify-self: end; }
+  .abre__foto { grid-area: foto; justify-self: center; width: min(100%, 420px); margin-top: 34px; }
+}
+
 /* oferta única */
 .opcao--unica { max-width: 860px; margin-inline: auto; justify-items: center; text-align: left; }
 .opcao__capa { width: min(58%, 230px); border-radius: 5px; transform: rotate(-3deg); box-shadow: 0 24px 36px -20px #000; }
