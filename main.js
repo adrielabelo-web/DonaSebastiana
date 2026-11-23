@@ -48,25 +48,34 @@
     else if (a.parentNode && a.parentNode.tagName === "LI") a.parentNode.hidden = true; // sem endereço, o botão não aparece
   });
 
-  // vídeo da vó: o botão grande dá o play e some; o primeiro play vira evento
+  // vídeo da vó: começa sozinho e sem som (o navegador não deixa tocar com som sem um toque).
+  // No primeiro toque ele volta pro começo, com som.
   document.querySelectorAll("[data-video]").forEach(function (cx) {
-    var v = cx.querySelector("video"), bt = cx.querySelector("[data-tocar]"), contou = false;
+    var v = cx.querySelector("video"), bt = cx.querySelector("[data-tocar]"), comSom = false;
     if (!v) return;
-    if (bt) bt.addEventListener("click", function () { v.play(); });
-    v.addEventListener("play", function () {
+    function evento(nome, fb) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: nome });
+      if (typeof window.fbq === "function") window.fbq("trackCustom", fb);
+    }
+    function ouvir() {
+      if (comSom) return; comSom = true;
+      v.muted = false; v.loop = false; v.controls = true; v.currentTime = 0;
+      v.play();
       if (bt) bt.hidden = true;
-      if (contou) return; contou = true;
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "vsl_play" });
-      if (typeof window.fbq === "function") window.fbq("trackCustom", "VSLPlay");
-    });
-    v.addEventListener("ended", function () {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "vsl_fim" });
-      if (typeof window.fbq === "function") window.fbq("trackCustom", "VSLFim");
-    });
+      evento("vsl_play", "VSLPlay");
+    }
+    var economia = navigator.connection && navigator.connection.saveData;
+    if (!economia) {
+      v.muted = true; v.loop = true; v.controls = false; v.setAttribute("muted", "");
+      var p = v.play();
+      if (p && p.then) p.then(function () { cx.classList.add("video--mudo"); }).catch(function () { v.controls = true; });
+    }
+    if (bt) bt.addEventListener("click", ouvir);
+    v.addEventListener("volumechange", function () { if (!v.muted && !comSom) ouvir(); });
+    v.addEventListener("play", function () { if (!v.muted && !comSom) ouvir(); });
+    v.addEventListener("ended", function () { if (comSom) evento("vsl_fim", "VSLFim"); });
   });
-
   // ano do rodapé
   var ano = document.querySelector("[data-ano]");
   if (ano) ano.textContent = new Date().getFullYear();
