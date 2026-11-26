@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Dona Sebastiana · O caderninho da vó, com mais de 500 receitas das antigas</title>
   <meta name="description" content="O caderninho da Dona Sebastiana: mais de 500 receitas das antigas, do tacho, do forno e da panela grande. Tu recebe na hora e lê no celular.">
-  <meta name="theme-color" content="#1B130E">
+  <meta name="theme-color" content="#9E2B1B">
   <link rel="canonical" href="https://adonasebastiana.com.br/">
   <meta property="og:url" content="https://adonasebastiana.com.br/">
   <meta property="og:type" content="website">
@@ -16,6 +16,7 @@
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/video/vsl-capa.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="fonts/nunito-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/alegreya.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script defer src="main.js"></script>
@@ -42,7 +43,17 @@
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- Faixa correndo: só frases da vó, nenhuma urgência inventada -->
+  <!-- rabiscos de caderno, usados nas margens -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="r-coracao" viewBox="0 0 60 60"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M30 51C12 39 5 28 10 17c5-9 17-8 20 3 3-11 16-13 21-3 5 11-3 22-21 34Z"/></symbol>
+    <symbol id="r-panela" viewBox="0 0 60 60"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M9 31h42M13 31c0 20 34 20 34 0M4 34l8-1M48 33l8 1M22 23c-4-6 4-9 0-16M32 23c-4-6 4-9 0-16M42 23c-4-6 4-9 0-16"/></symbol>
+    <symbol id="r-estrela" viewBox="0 0 60 60"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M30 7l6 17h18L40 34l5 18-15-11-15 11 5-18L6 24h18Z"/></symbol>
+    <symbol id="r-pao" viewBox="0 0 60 60"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M8 38c-4-14 10-22 22-22s26 8 22 22c-2 8-42 8-44 0ZM20 24l4 8M30 22l3 9M40 24l2 8"/></symbol>
+    <symbol id="r-casa" viewBox="0 0 60 60"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M10 54V30l20-17 20 17v24ZM24 54V41h12v13M40 21v-9h6v14"/></symbol>
+    <symbol id="r-sol" viewBox="0 0 60 60"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M30 19c12 0 13 14 7 19-7 6-18 2-17-8 0-6 4-11 10-11ZM30 4v7M30 50v6M4 30h7M50 30h6M11 11l6 6M43 43l6 6M49 11l-6 6M11 49l6-6"/></symbol>
+  </svg>
+
+  <!-- Faixa correndo: só frases da vó -->
   <div class="faixa" aria-hidden="true">
     <div class="faixa__trilho">
       <span>Receita das antigas</span><span>Do jeitinho da vó</span><span>Mais de 500 receitas no caderninho</span><span>Do tacho, do forno e da panela grande</span><span>Só quem é das antigas sabe</span>
@@ -56,281 +67,239 @@
         <span class="marca__nome">Dona Sebastiana</span>
         <span class="marca__sub">receitas das antigas</span>
       </a>
-      <nav class="topo__nav" aria-label="Seções">
-        <a href="#dentro">O caderninho</a>
-        <a href="#receitas">Receitas</a>
-        <a href="#vo">A vó</a>
-        <a href="#duvidas">Dúvidas</a>
-      </nav>
       <a class="botao botao--pequeno" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="topo">Quero o meu</a>
     </div>
-    <div class="xadrez" aria-hidden="true"></div>
   </header>
 
   <main id="conteudo">
-    <!-- Abertura: a vó com o caderno na mão, botão e preço na primeira tela -->
+    <!-- 1 · Abertura -->
     <section class="abre" aria-labelledby="titulo-abre">
-      <div class="caixa abre__in">
-        <div class="abre__titulo">
-          <p class="etiqueta">O caderninho da vó · mais de 500 receitas</p>
-          <h1 id="titulo-abre">Receita das antigas, <em>do jeitinho da vó.</em></h1>
+      <div class="caixa">
+        <p class="selo-marca">Sabor de vó</p>
+        <h1 id="titulo-abre"><mark>Mais de 500 receitas das antigas</mark> pra trazer de volta aquele sabor de <em>comida caseira</em> que marcou tantas lembranças.</h1>
+
+        <div class="video" data-video>
+          <video src="assets/video/vsl.mp4" poster="assets/video/vsl-capa.webp" width="720" height="1280" controls playsinline preload="none" aria-label="A Dona Sebastiana apresenta o caderninho de receitas"></video>
+          <button class="video__tocar" type="button" data-tocar><span class="video__seta" aria-hidden="true"></span><span class="video__chama">Aperta aqui e ouve a vó</span><span class="video__mudo">Tá sem som. Aperta pra ouvir a vó</span></button>
         </div>
-        <div class="abre__video">
-          <div class="video" data-video>
-            <video src="assets/video/vsl.mp4" poster="assets/video/vsl-capa.webp" width="720" height="1280" controls playsinline preload="none" aria-label="A Dona Sebastiana apresenta o caderninho de receitas"></video>
-            <button class="video__tocar" type="button" data-tocar><span class="video__seta" aria-hidden="true"></span><span class="video__chama">Aperta aqui e ouve a vó</span><span class="video__mudo">Tá sem som. Aperta pra ouvir a vó</span></button>
-          </div>
+
+        <div class="cartao cartao--destaque abre__resumo">
+          <p><mark class="m-amarelo">Doces de tacho, bolos e cucas</mark>, <mark class="m-rosa">pães, sopas, carnes e massas da colônia</mark> reunidos num <strong>caderninho digital de receitas antigas</strong>.</p>
         </div>
-        <div class="abre__texto">
-          <p class="abre__fala">Eu sou a Dona Sebastiana. Juntei num caderno só o doce de tacho, a comida de panela, o pão e a cuca da colônia. Comida de verdade, minha filha, com o que tu já tem em casa.</p>
-          <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="abre">Quero o caderninho da vó · R$ 9,90 <span aria-hidden="true">→</span></a>
-          <ul class="selos">
-            <li>Tu recebe na hora</li>
-            <li>Lê no celular</li>
-            <li>Paga uma vez só</li>
-          </ul>
-        </div>
+
+        <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="abre">Quero meu caderninho · R$ 9,90</a>
+        <ul class="selos">
+          <li>Tu recebe na hora</li>
+          <li>Lê no celular</li>
+          <li>Paga uma vez só</li>
+        </ul>
+
         <figure class="abre__foto">
-          <img class="abre__vo" src="assets/img/vo-caderno-900.webp" srcset="assets/img/vo-caderno-520.webp 520w, assets/img/vo-caderno-900.webp 900w" sizes="(min-width: 900px) 420px, 86vw" width="900" height="1125" alt="Dona Sebastiana sorrindo na cozinha da roça, abraçada ao caderno de receitas, com o fogão a lenha aceso ao fundo" loading="lazy" decoding="async">
+          <img class="abre__vo" src="assets/img/vo-caderno-900.webp" srcset="assets/img/vo-caderno-520.webp 520w, assets/img/vo-caderno-900.webp 900w" sizes="(min-width: 700px) 440px, 86vw" width="900" height="1125" alt="Dona Sebastiana sorrindo na cozinha da roça, abraçada ao caderno de receitas, com o fogão a lenha aceso ao fundo" loading="lazy" decoding="async">
           <img class="abre__capa" src="assets/img/capa-caderninho.webp" width="505" height="825" alt="Capa do Caderno Completo da Dona Sebastiana" loading="lazy" decoding="async">
-          <figcaption class="bilhete bilhete--foto">Tá tudo aqui, minha filha.</figcaption>
+          <figcaption class="bilhete">Tá tudo aqui, minha filha.</figcaption>
         </figure>
       </div>
+      <svg class="rab rab--1" aria-hidden="true"><use href="#r-coracao"/></svg>
+      <svg class="rab rab--2" aria-hidden="true"><use href="#r-panela"/></svg>
     </section>
+    <div class="xadrez" aria-hidden="true"></div>
 
-    <!-- Números: só os que têm origem -->
-    <section class="numeros" aria-label="A cozinha da vó em números">
-      <ul class="caixa numeros__in">
-        <li><b>500+</b><span>receitas no caderninho</span></li>
-        <li><b>70 mil</b><span>seguidores no Instagram</span></li>
-        <li><b>7 milhões</b><span>de visualizações no Facebook</span></li>
-        <li><b>R$ 9,90</b><span>uma vez só, sem mensalidade</span></li>
-      </ul>
-    </section>
-
-    <!-- Dentro do caderninho -->
-    <section class="secao folha" id="dentro" aria-labelledby="titulo-dentro">
+    <!-- 2 · Pra quem é -->
+    <section class="secao secao--clara" id="pra-ti" aria-labelledby="titulo-pra-ti">
       <div class="caixa">
-        <div class="dentro__cabeca">
-          <p class="numerao" aria-hidden="true">500+</p>
-          <div>
-            <p class="etiqueta">Dentro do caderninho</p>
-            <h2 id="titulo-dentro">Do tacho, do forno <em>e da panela grande.</em></h2>
-            <p>Mais de 500 receitas das antigas num lugar só. As que a vó mostra nos vídeos e as novidades da colônia.</p>
-          </div>
-        </div>
-        <ul class="partes">
-          <li><span class="partes__n">01</span><h3>Doces</h3><p>De tacho e de colher, pra adoçar a mesa de domingo.</p></li>
-          <li><span class="partes__n">02</span><h3>Pães</h3><p>Massa sovada na mão, que cresce sem pressa.</p></li>
-          <li><span class="partes__n">03</span><h3>Sopas</h3><p>Pro dia frio, daquelas que esquentam a casa.</p></li>
-          <li><span class="partes__n">04</span><h3>Carnes</h3><p>De panela e de forno, com o ponto que a vó gosta.</p></li>
-          <li><span class="partes__n">05</span><h3>Massas da colônia</h3><p>Do jeito que se faz lá em casa desde sempre.</p></li>
-          <li><span class="partes__n">06</span><h3>Conservas e bebidas</h3><p>Pra guardar na prateleira e servir pra visita.</p></li>
+        <h2 id="titulo-pra-ti">Essas receitas são pra ti que</h2>
+        <ul class="praquem">
+          <li><span>Tem saudade da comida de vó e dos domingos em família</span></li>
+          <li><span>Quer ensinar pros filhos e netos as receitas que marcaram a tua vida</span></li>
+          <li><span>Quer comer comida de verdade, feita em casa, sem gastar muito</span></li>
+          <li><span>Já tentou receita da internet e não deu o ponto</span></li>
+          <li><span>Gosta de ter a despensa cheia de compota, doce e conserva</span></li>
+          <li><span>Quer fazer doce caseiro pra adoçar a família ou pra vender</span></li>
         </ul>
-        <div class="mostra">
-          <p class="mostra__titulo">Toda receita mostra</p>
-          <ul class="agata">
-            <li>Os ingredientes</li>
-            <li>O modo de fazer</li>
-            <li>A medida em xícara e em gramas</li>
-            <li>O segredo da vó</li>
+      </div>
+      <svg class="rab rab--3" aria-hidden="true"><use href="#r-casa"/></svg>
+      <svg class="rab rab--4" aria-hidden="true"><use href="#r-estrela"/></svg>
+    </section>
+
+    <!-- 3 · O que tu vai receber -->
+    <section class="secao secao--brasa" id="dentro" aria-labelledby="titulo-dentro">
+      <div class="caixa">
+        <p class="etiqueta">O que tu vai receber</p>
+        <h2 id="titulo-dentro">Mais de 500 receitas, num caderninho só</h2>
+
+        <div class="cartao recebe">
+          <h3>O Caderno Completo da Dona Sebastiana</h3>
+          <div class="livro"><img src="assets/img/capa-caderninho.webp" width="505" height="825" alt="Capa do Caderno Completo da Dona Sebastiana, com mais de 500 receitas" loading="lazy" decoding="async"></div>
+          <p><strong>Mais de 500 receitas</strong> do tacho, do forno e da panela grande:</p>
+          <ul class="pilulas">
+            <li>doces</li>
+            <li>pães</li>
+            <li>sopas</li>
+            <li>carnes</li>
+            <li>massas da colônia</li>
+            <li>conservas e bebidas</li>
           </ul>
         </div>
-      </div>
-    </section>
 
-    <!-- Receitas -->
-    <section class="secao" id="receitas" aria-labelledby="titulo-receitas">
-      <div class="caixa">
-        <div class="cabeca">
-          <p class="etiqueta">O que tem no fogo</p>
-          <h2 id="titulo-receitas">As receitas da vó</h2>
+        <div class="cartao encontra">
+          <h3>Tu vai encontrar</h3>
+          <ul class="lista-ok">
+            <li><strong>Doces</strong> de tacho e de colher, pra adoçar a mesa de domingo</li>
+            <li><strong>Pães</strong> de massa sovada na mão, que cresce sem pressa</li>
+            <li><strong>Sopas</strong> pro dia frio, das que esquentam a casa</li>
+            <li><strong>Carnes</strong> de panela e de forno, no ponto que a vó gosta</li>
+            <li><strong>Massas da colônia</strong>, do jeito que se faz lá em casa</li>
+            <li><strong>Conservas e bebidas</strong> pra guardar e servir pra visita</li>
+          </ul>
+          <p class="encontra__mostra">Toda receita mostra os ingredientes, o modo de fazer, a medida em xícara e em gramas e o segredo da vó.</p>
+          <p class="encontra__olha">Olha algumas receitas do caderninho</p>
+          <ul class="grade" data-grade>
+            <li><img src="assets/img/doces-640.webp" width="1536" height="1024" alt="Doce de abóbora no tacho de cobre" loading="lazy" decoding="async"><span>Doce de tacho</span></li>
+            <li><img src="assets/img/panela-640.webp" width="1536" height="1024" alt="Panela de ferro com carne ensopada e costela assada" loading="lazy" decoding="async"><span>Comida de panela</span></li>
+            <li><img src="assets/img/paes-640.webp" width="1536" height="1024" alt="Cuca de farofa recém-assada" loading="lazy" decoding="async"><span>Cuca da colônia</span></li>
+          </ul>
         </div>
-        <ul class="linhas">
-          <li class="painel linha">
-            <img src="assets/img/doces-640.webp" srcset="assets/img/doces-640.webp 640w, assets/img/doces-1100.webp 1100w" sizes="(min-width: 900px) 360px, 92vw" width="1536" height="1024" alt="A vó mexendo doce de abóbora num tacho de cobre no fogão a lenha" loading="lazy" decoding="async">
-            <h3>Doces de tacho</h3>
-            <p>Isso é das antigas. Fruta, açúcar, tacho de cobre e paciência.</p>
-            <ul class="pontos">
-              <li>Doce de casca de melancia</li>
-              <li>Sagu de vinho</li>
-              <li>Ambrosia</li>
-              <li>Figo em calda</li>
-            </ul>
-          </li>
-          <li class="painel linha">
-            <img src="assets/img/panela-640.webp" srcset="assets/img/panela-640.webp 640w, assets/img/panela-1100.webp 1100w" sizes="(min-width: 900px) 360px, 92vw" width="1536" height="1024" alt="Panela de ferro com carne ensopada e uma costela assada com batatas na mesa de madeira" loading="lazy" decoding="async">
-            <h3>Comida de panela</h3>
-            <p>Aquela que perfuma a casa inteira e junta a família na mesa.</p>
-            <ul class="pontos">
-              <li>Puchero</li>
-              <li>Costela</li>
-              <li>Matambre</li>
-              <li>Polenta</li>
-            </ul>
-          </li>
-          <li class="painel linha">
-            <img src="assets/img/paes-640.webp" srcset="assets/img/paes-640.webp 640w, assets/img/paes-1100.webp 1100w" sizes="(min-width: 900px) 360px, 92vw" width="1536" height="1024" alt="A vó com uma cuca de farofa recém-assada na mesa, perto do fogão a lenha" loading="lazy" decoding="async">
-            <h3>Pães e cucas da colônia</h3>
-            <p>Massa que a vó sova na mão e deixa crescer sem pressa.</p>
-            <ul class="pontos">
-              <li>Cuca</li>
-              <li>Pão de lentilha</li>
-              <li>Bolo-pudim</li>
-              <li>Panetone</li>
-            </ul>
-          </li>
-        </ul>
-        <p class="centro"><a class="botao" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="receitas">Quero essas receitas · R$ 9,90</a></p>
+
+        <a class="botao botao--grande botao--claro" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="dentro">Quero essas receitas · R$ 9,90</a>
       </div>
     </section>
+    <div class="xadrez xadrez--verde" aria-hidden="true"></div>
 
-    <!-- A vó -->
+    <!-- 4 · Conhece a vó -->
     <section class="secao" id="vo" aria-labelledby="titulo-vo">
-      <div class="caixa vo">
-        <figure class="vo__foto">
-          <img src="assets/img/escrevendo-520.webp" srcset="assets/img/escrevendo-520.webp 520w, assets/img/escrevendo-900.webp 900w" sizes="(min-width: 900px) 400px, 80vw" width="1024" height="1180" alt="As mãos da vó escrevendo uma receita no caderno, com uma caneca de ágata ao lado" loading="lazy" decoding="async">
+      <div class="caixa">
+        <p class="chamada">Mas antes, deixa a vó te contar uma coisa...</p>
+        <h2 id="titulo-vo">Conhece a Dona Sebastiana</h2>
+        <figure class="moldura">
+          <img src="assets/img/casal-700.webp" srcset="assets/img/casal-700.webp 700w, assets/img/casal-1200.webp 1200w" sizes="(min-width: 700px) 600px, 92vw" width="1536" height="1024" alt="Dona Sebastiana e Seu Toin tomando café em canecas de ágata, com biscoitos caseiros na mesa" loading="lazy" decoding="async">
         </figure>
-        <div class="vo__texto">
-          <p class="etiqueta">A história da vó</p>
-          <h2 id="titulo-vo">Senta, que a vó te conta.</h2>
-          <p>Tenho uns 85 anos e sou do interior do Rio Grande do Sul, da colônia. Aprendi a cozinhar no fogão a lenha e guardei tudo num caderno escrito à mão.</p>
-          <p>Tenho mais de 20 netos. E agora tu também é de casa, minha filha. Todo dia a vó mostra uma receita nova.</p>
-          <dl class="ficha">
-            <div><dt>De onde</dt><dd>Interior do Rio Grande do Sul</dd></div>
-            <div><dt>Fogão</dt><dd>A lenha</dd></div>
-            <div><dt>Na cozinha com ela</dt><dd>Seu Toin e a Marieta</dd></div>
-            <div><dt>No caderno</dt><dd>Mais de 500 receitas</dd></div>
-          </dl>
-          <p class="bilhete">Só quem é das antigas sabe o que é isso.</p>
-          <ul class="redes">
-            <li><a class="botao botao--linha" href="#vo" data-rede="instagram">Instagram da vó</a></li>
-            <li><a class="botao botao--linha" href="#vo" data-rede="facebook">Facebook</a></li>
-            <li><a class="botao botao--linha" href="#vo" data-rede="tiktok">TikTok</a></li>
-          </ul>
+        <ul class="fatos">
+          <li>Da colônia gaúcha</li>
+          <li>Casada há mais de 60 anos</li>
+          <li>Cozinha no fogão a lenha</li>
+          <li>Vó de mais de 20 netos</li>
+        </ul>
+        <div class="cartao carta">
+          <p class="carta__abre">Não fiz faculdade de gastronomia, mas <span class="grifo">passei a vida cozinhando com amor pra minha família</span>.</p>
+          <p>Aprendi no fogão a lenha e fui guardando tudo num caderno escrito à mão. Um dia comecei a <span class="grifo">mostrar a minha cozinha nas redes</span>, uma receita por dia.</p>
+          <p>Aí <span class="grifo">o pessoal começou a pedir</span> as receitas por escrito, do jeitinho que estão nas minhas <strong>anotações</strong>.</p>
+          <p class="carta__fiz">Juntei tudo num caderninho e deixei pra todo mundo levar.</p>
+          <p class="carta__fecho">Pus um preço que cabe no bolso, minha filha, pra essas receitas chegarem em toda cozinha.</p>
+          <p class="carta__assina">Vó Sebastiana</p>
         </div>
+        <ul class="gente">
+          <li>
+            <img src="assets/img/toin-420.webp" width="420" height="525" alt="Seu Toin, de bigode branco e camisa xadrez, na varanda da roça" loading="lazy" decoding="async">
+            <div>
+              <h3>Seu Toin</h3>
+              <p>Meu marido. Cuida do fogo e da carne, e rouba um pedaço antes de eu servir.</p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/img/marieta-420.webp" width="420" height="525" alt="Marieta, filha da Dona Sebastiana, sorrindo na frente da casa da roça" loading="lazy" decoding="async">
+            <div>
+              <h3>Marieta</h3>
+              <p>Minha filha. Mora na cidade e, no fim, sempre diz que a mãe tinha razão.</p>
+            </div>
+          </li>
+        </ul>
+        <ul class="redes">
+          <li><a class="botao botao--linha" href="#vo" data-rede="instagram">Instagram da vó</a></li>
+          <li><a class="botao botao--linha" href="#vo" data-rede="facebook">Facebook</a></li>
+          <li><a class="botao botao--linha" href="#vo" data-rede="tiktok">TikTok</a></li>
+        </ul>
       </div>
+      <svg class="rab rab--5" aria-hidden="true"><use href="#r-pao"/></svg>
+      <svg class="rab rab--6" aria-hidden="true"><use href="#r-sol"/></svg>
     </section>
+    <div class="xadrez xadrez--ouro" aria-hidden="true"></div>
 
-    <!-- Oferta: uma só -->
-    <section class="secao folha" id="oferta" aria-labelledby="titulo-oferta">
+    <!-- 5 · Oferta -->
+    <section class="secao secao--creme" id="oferta" aria-labelledby="titulo-oferta">
       <div class="caixa">
-        <div class="cabeca">
-          <p class="etiqueta">Leva pra tua cozinha</p>
-          <h2 id="titulo-oferta">O caderninho da vó, <em>inteirinho.</em></h2>
-          <p>Chega no teu e-mail na hora.</p>
-        </div>
-        <article class="opcao opcao--destaque opcao--unica">
-          <img class="opcao__capa" src="assets/img/capa-caderninho.webp" width="505" height="825" alt="Capa do Caderno Completo da Dona Sebastiana" loading="lazy" decoding="async">
-          <div class="opcao__corpo">
-            <h3>O Caderno Completo da Dona Sebastiana</h3>
-            <ul class="marcas">
-              <li>Mais de 500 receitas das antigas</li>
-              <li>Doces, pães, sopas, carnes, massas da colônia, conservas e bebidas</li>
-              <li>Tu recebe na hora e lê no celular</li>
-              <li>Paga uma vez só, no Pix ou no cartão</li>
-            </ul>
-            <p class="preco">R$ 9,90</p>
-            <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="oferta">Quero o caderninho da vó · R$ 9,90 <span aria-hidden="true">→</span></a>
-          </div>
+        <h2 id="titulo-oferta">Agora é contigo: leva o teu caderninho</h2>
+        <article class="cartao plano">
+          <img class="plano__capa" src="assets/img/capa-caderninho.webp" width="505" height="825" alt="" loading="lazy" decoding="async">
+          <h3>O caderninho da vó</h3>
+          <p class="plano__sub">O Caderno Completo da Dona Sebastiana, do tacho, do forno e da panela grande.</p>
+          <ul class="lista-ok">
+            <li>Mais de 500 receitas das antigas</li>
+            <li>Doces, pães, sopas, carnes, massas da colônia, conservas e bebidas</li>
+            <li>Ingredientes e modo de fazer</li>
+            <li>Medida em xícara e em gramas</li>
+            <li>O segredo da vó em cada receita</li>
+            <li>Tu recebe na hora e lê no celular</li>
+          </ul>
+          <p class="preco">R$ 9,90</p>
+          <p class="preco__nota">Pagamento único, no Pix ou no cartão.</p>
+          <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="oferta">Quero meu caderninho · R$ 9,90</a>
         </article>
-      </div>
-    </section>
-    <!-- Garantia -->
-    <section class="secao" id="garantia" aria-labelledby="titulo-garantia">
-      <div class="caixa">
-        <div class="painel palavra">
-          <div class="selo" aria-hidden="true"><b>7</b><span>dias</span><i>palavra da vó</i></div>
-          <div class="palavra__texto">
-            <p class="etiqueta">A garantia</p>
-            <h2 id="titulo-garantia">A palavra da vó.</h2>
-            <p>Leva o caderninho pra tua cozinha. Abre, lê, faz uma receita e põe na mesa.</p>
-            <p>Se tu não gostar, pede o dinheiro de volta em até <span>7 dias</span>, direto na Kiwify, que é por onde tu compra. Ninguém vai te fazer pergunta.</p>
-            <p class="bilhete">É a palavra da vó.</p>
-          </div>
+
+        <div class="cartao garantia" id="garantia">
+          <div class="selo" aria-hidden="true"><b>7</b><span>dias</span></div>
+          <h3>Tua compra tem 7 dias de garantia</h3>
+          <p>Tu recebe o caderninho, abre o arquivo e confere tudo com calma.</p>
+          <p>Se não gostar, pede o dinheiro de volta dentro de 7 dias, direto na Kiwify, que é por onde tu compra.</p>
+          <p class="bilhete">É a palavra da vó.</p>
         </div>
       </div>
     </section>
 
-    <!-- A família -->
-    <section class="secao" id="familia" aria-labelledby="titulo-familia">
+    <!-- 6 · Dúvidas -->
+    <section class="secao secao--madeira" id="duvidas" aria-labelledby="titulo-duvidas">
       <div class="caixa">
-        <div class="cabeca">
-          <p class="etiqueta">Lá da roça</p>
-          <h2 id="titulo-familia">A família da vó</h2>
-        </div>
-        <div class="familia">
-          <figure class="familia__foto">
-            <img src="assets/img/casal-700.webp" srcset="assets/img/casal-700.webp 700w, assets/img/casal-1200.webp 1200w" sizes="(min-width: 900px) 560px, 92vw" width="1536" height="1024" alt="Dona Sebastiana e Seu Toin tomando café em canecas de ágata, com biscoitos caseiros na mesa" loading="lazy" decoding="async">
-          </figure>
-          <ul class="gente">
-            <li>
-              <img src="assets/img/toin-420.webp" width="420" height="525" alt="Seu Toin, de bigode branco e camisa xadrez, na varanda da roça" loading="lazy" decoding="async">
-              <div>
-                <h3>Seu Toin</h3>
-                <p>Meu marido faz mais de 60 anos. Cuida do fogo e da carne, e rouba um pedaço antes de eu servir. O bigode vive sujo de farofa.</p>
-                <p class="bilhete bilhete--fala">"Bah, véia."</p>
-              </div>
-            </li>
-            <li>
-              <img src="assets/img/marieta-420.webp" width="420" height="525" alt="Marieta, filha da Dona Sebastiana, sorrindo na frente da casa da roça" loading="lazy" decoding="async">
-              <div>
-                <h3>Marieta</h3>
-                <p>Minha filha. Mora na cidade e traz o jeito de hoje. No fim, sempre diz que a mãe tinha razão.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dúvidas -->
-    <section class="secao folha" id="duvidas" aria-labelledby="titulo-duvidas">
-      <div class="caixa duvidas">
-        <div class="duvidas__lado">
-          <p class="etiqueta">Dúvidas comuns</p>
-          <h2 id="titulo-duvidas">O que tu ainda <em>quer saber.</em></h2>
-          <p>As perguntas que mais chegam antes de levar o caderninho.</p>
-          <a class="botao" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="duvidas">Quero o caderninho · R$ 9,90 <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="duvidas__lista">
+        <h2 id="titulo-duvidas">Dúvidas frequentes</h2>
+        <div class="duvidas">
           <details open>
-            <summary>Como eu recebo o caderninho?</summary>
-            <p>Assim que o pagamento é confirmado, chega um e-mail com o acesso. É um livro digital. Tu lê no celular, no computador, ou imprime se preferir.</p>
+            <summary>Como vou receber o caderninho?</summary>
+            <p>Assim que o pagamento é confirmado, chega um e-mail com o acesso.</p>
           </details>
           <details>
-            <summary>É mensalidade?</summary>
-            <p>Não, minha filha. Tu paga uma vez só e o caderninho é teu.</p>
+            <summary>É um livro físico?</summary>
+            <p>Não. É um livro digital, que tu abre no celular ou no computador e pode imprimir pra usar em casa.</p>
+          </details>
+          <details>
+            <summary>Preciso imprimir?</summary>
+            <p>Não precisa. Dá pra abrir no celular e ir olhando a receita enquanto cozinha.</p>
+          </details>
+          <details>
+            <summary>As receitas são difíceis?</summary>
+            <p>Não, minha filha. É comida de casa, com ingrediente que tu já tem na despensa ou acha em qualquer mercado, e o modo de fazer explicado.</p>
+          </details>
+          <details>
+            <summary>Existe mensalidade?</summary>
+            <p>Não. Tu paga uma vez só e o caderninho é teu.</p>
           </details>
           <details>
             <summary>Dá pra pagar no Pix?</summary>
             <p>Dá. A página de pagamento aceita Pix e cartão.</p>
           </details>
           <details>
-            <summary>Preciso de ingrediente caro ou difícil de achar?</summary>
-            <p>Não. É comida de casa, feita com o que tu já tem na despensa ou acha em qualquer mercado.</p>
-          </details>
-          <details>
             <summary>E se eu não gostar?</summary>
-            <p>Tu pede o dinheiro de volta em até <span>7 dias</span>, direto na Kiwify.</p>
+            <p>Tu tem 7 dias pra pedir o dinheiro de volta, direto na Kiwify.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- Fechamento -->
-    <section class="fim" aria-labelledby="titulo-fim">
-      <img class="fim__fundo" src="assets/img/porta-700.webp" srcset="assets/img/porta-700.webp 700w, assets/img/porta-1024.webp 1024w" sizes="100vw" width="1024" height="1536" alt="" loading="lazy" decoding="async">
-      <div class="caixa fim__in">
-        <h2 id="titulo-fim">Entra, minha filha. A cozinha é tua.</h2>
-        <p>Mais de 500 receitas te esperando no caderninho da vó.</p>
-        <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="fim">Quero o caderninho da vó · R$ 9,90</a>
+    <!-- 7 · Fechamento -->
+    <section class="secao secao--creme fim" aria-labelledby="titulo-fim">
+      <div class="caixa">
+        <h2 id="titulo-fim">Não deixa os sabores de antigamente ficarem só na lembrança</h2>
+        <figure class="moldura moldura--alta">
+          <img src="assets/img/topo-cel-780.webp" width="780" height="638" alt="Dona Sebastiana sorrindo na cozinha da roça, com pães caseiros e biscoitos na mesa" loading="lazy" decoding="async">
+        </figure>
+        <p>Tem receita das antigas pra todo dia, pra experimentar prato novo e pra guardar as que são especiais pra tua família.</p>
+        <p>Daquela cuca pro café até a costela do almoço de domingo.</p>
+        <p class="fim__frase">O sabor de vó merece continuar na tua cozinha.</p>
+        <a class="botao botao--grande" href="https://pay.kiwify.com.br/kX2Z2YT" data-produto="caderninho" data-pos="fim">Quero meu caderninho da Dona Sebastiana</a>
+        <p class="fim__nota">Pagamento único · Acesso digital · Garantia de 7 dias</p>
       </div>
     </section>
   </main>
 
   <footer class="rodape">
-    <div class="xadrez" aria-hidden="true"></div>
     <div class="caixa rodape__in">
       <p class="marca"><span class="marca__nome">Dona Sebastiana</span><span class="marca__sub">receitas das antigas</span></p>
       <p>Dona Sebastiana é uma personagem criada com inteligência artificial. As receitas são reais e testadas.</p>
