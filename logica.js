@@ -92,7 +92,8 @@
     filme.addEventListener("ended", function () { if (comSom) evento("vsl_fim", "VSLFim"); });
     if (bt) bt.addEventListener("click", ouvir);
 
-    // a prévia só começa depois que a capa do vídeo já apareceu, para não atrasar o topo da página
+    // A prévia só começa depois que a capa do vídeo já foi pintada na tela (e com a aba visível),
+    // para o download dela não disputar rede com o topo da página.
     var economia = navigator.connection && navigator.connection.saveData;
     function iniciarPrevia() {
       if (comSom || solto || !previa || economia) return;
@@ -107,15 +108,21 @@
     }
     (function () {
       var feito = false;
+      var quadro = window.requestAnimationFrame || function (f) { setTimeout(f, 16); };
       function ir() {
-        if (feito) return; feito = true;
-        var quadro = window.requestAnimationFrame || function (f) { setTimeout(f, 16); };
-        quadro(function () { setTimeout(iniciarPrevia, 0); });
+        if (feito) return;
+        if (document.hidden) { document.addEventListener("visibilitychange", ir); return; } // aba em segundo plano: espera aparecer
+        feito = true;
+        document.removeEventListener("visibilitychange", ir);
+        iniciarPrevia();
       }
+      // capa carregada, dois quadros desenhados e mais um respiro: aí a capa já está na tela
+      function depoisDaCapa() { quadro(function () { quadro(function () { setTimeout(ir, 250); }); }); }
       var capa = filme.getAttribute("poster");
-      if (capa) { var im = new Image(); im.onload = ir; im.onerror = ir; im.src = capa; }
-      window.addEventListener("load", ir);
-      setTimeout(ir, 3500);
+      if (capa) { var im = new Image(); im.onload = depoisDaCapa; im.onerror = depoisDaCapa; im.src = capa; }
+      // garantias, caso a capa demore
+      window.addEventListener("load", function () { setTimeout(ir, 1500); });
+      setTimeout(ir, 4500);
     })();
   });
 

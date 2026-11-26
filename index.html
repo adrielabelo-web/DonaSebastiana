@@ -422,15 +422,19 @@ if (p && p.then) p.then(function () { if (!comSom) cx.classList.add("video--mudo
 }
 (function () {
 var feito = false;
-function ir() {
-if (feito) return; feito = true;
 var quadro = window.requestAnimationFrame || function (f) { setTimeout(f, 16); };
-quadro(function () { setTimeout(iniciarPrevia, 0); });
+function ir() {
+if (feito) return;
+if (document.hidden) { document.addEventListener("visibilitychange", ir); return; } // aba em segundo plano: espera aparecer
+feito = true;
+document.removeEventListener("visibilitychange", ir);
+iniciarPrevia();
 }
+function depoisDaCapa() { quadro(function () { quadro(function () { setTimeout(ir, 250); }); }); }
 var capa = filme.getAttribute("poster");
-if (capa) { var im = new Image(); im.onload = ir; im.onerror = ir; im.src = capa; }
-window.addEventListener("load", ir);
-setTimeout(ir, 3500);
+if (capa) { var im = new Image(); im.onload = depoisDaCapa; im.onerror = depoisDaCapa; im.src = capa; }
+window.addEventListener("load", function () { setTimeout(ir, 1500); });
+setTimeout(ir, 4500);
 })();
 });
 var ano = document.querySelector("[data-ano]");
