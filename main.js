@@ -81,7 +81,7 @@
   if (ano) ano.textContent = new Date().getFullYear();
 
   // entrada suave, só no que ainda está abaixo da tela
-  var alvo = document.querySelectorAll(".cabeca, .painel, .agata, .partes li, .opcao, .dentro__cabeca, .familia__foto, .gente li, .vo__foto, .vo__texto, .duvidas__lista, .fim__in");
+  var alvo = document.querySelectorAll(".secao h2, .cartao, .praquem li, .fatos, .moldura, .gente li, .duvidas details, .abre__foto");
   var calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!calmo && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) {
