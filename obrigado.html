@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dona Sebastiana · Tua compra deu certo</title>
+  <meta name="theme-color" content="#17803D">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preload" href="fonts/nunito-sans-pt.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/alegreya-800.woff2" as="font" type="font/woff2" crossorigin>
+  <!--
+    Página de obrigado com a oferta dos 100 Molhos (upsell de 1 clique da Kiwify, script upsell-v2).
+    Quem chega aqui acabou de pagar o caderninho: a Kiwify manda para este endereço com ?token=...&code_senha=...
+    Esses dois parâmetros são a chave da compra da pessoa. Por isso esta página NÃO carrega Pixel, Utmify nem
+    qualquer script de fora além do da própria Kiwify.
+    Página independente: o visual está todo aqui dentro (não usa estilo.css nem passa pelo montar.cjs).
+    Tudo fica dentro de .pg para não mexer no que a Kiwify desenha.
+  -->
+  <script>document.documentElement.className = "js";</script>
+  <style>
+    @font-face { font-family: "Alegreya"; font-weight: 800; font-style: normal; font-display: swap; src: url(fonts/alegreya-800.woff2) format("woff2"); }
+    @font-face { font-family: "Nunito Sans"; font-weight: 400 900; font-style: normal; font-display: swap; src: url(fonts/nunito-sans-pt.woff2) format("woff2"); }
+    @font-face { font-family: "Alegreya reserva A"; font-weight: 800; font-style: normal; src: local("Noto Serif Bold"), local("NotoSerif-Bold"); size-adjust: 81.5%; }
+    @font-face { font-family: "Alegreya reserva G"; font-weight: 800; font-style: normal; src: local("Georgia Bold"), local("Georgia-Bold"); size-adjust: 80.5%; }
+
+    :root {
+      color-scheme: only light;
+      --papel: #FBF4E6; --creme: #F5E6CC; --branco: #FFFDF8;
+      --tinta: #3B2416; --tinta-suave: #5A4636;
+      --xadrez: #9E2B1B; --ouro: #E9B44C; --marca-texto: #FFD95A;
+      --verde: #17803D; --verde-escuro: #0B3D22;
+      --f-titulo: "Alegreya", "Alegreya reserva A", "Alegreya reserva G", Georgia, "Times New Roman", serif;
+      --f-texto: "Nunito Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --margem: 18px; --coluna: 600px;
+    }
+    html { -webkit-text-size-adjust: 100%; background: var(--papel); }
+    body { margin: 0; background: var(--papel); }
+
+    .pg { overflow-x: hidden; overflow-x: clip; color: var(--tinta); font-family: var(--f-texto); font-size: 1.1875rem; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    .pg *, .pg *::before, .pg *::after { box-sizing: border-box; }
+    .pg h1, .pg h2, .pg h3, .pg p, .pg ul, .pg ol, .pg blockquote { margin: 0; }
+    .pg ul, .pg ol { padding: 0; list-style: none; }
+    .pg img { display: block; max-width: 100%; height: auto; }
+    .pg strong { font-weight: 900; }
+    .pg [hidden] { display: none !important; }
+    .pg :focus-visible { outline: 3px solid #1F3358; outline-offset: 3px; border-radius: 8px; }
+    .pg h1, .pg h2, .pg h3 { font-family: var(--f-titulo); font-weight: 800; line-height: 1.14; text-wrap: balance; }
+    .pg h1 { font-size: clamp(1.75rem, 1.1rem + 3.4vw, 2.5rem); text-align: center; }
+    .pg h2 { font-size: clamp(1.6rem, 1.25rem + 1.8vw, 2.1rem); text-align: center; }
+    .pg h1 em { font-style: normal; color: var(--xadrez); }
+    .caixa { width: 100%; max-width: calc(var(--coluna) + 2 * var(--margem)); margin-inline: auto; padding-inline: var(--margem); display: grid; gap: 18px; }
+
+    /* aviso de compra aprovada: é a primeira coisa que a pessoa precisa ler */
+    .certo { background: #E3F4E8; border-bottom: 4px solid var(--verde); color: var(--verde-escuro); }
+    .certo__in { grid-template-columns: 40px minmax(0, 1fr); align-items: center; gap: 12px; padding-block: 12px; }
+    .certo__ok { position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--verde); }
+    .certo__ok::after { content: ""; position: absolute; left: 11px; top: 11px; width: 18px; height: 10px; border-left: 4px solid #fff; border-bottom: 4px solid #fff; transform: rotate(-45deg); }
+    .certo p { font-size: 1.02rem; line-height: 1.35; }
+    .certo strong { display: block; font-size: 1.14rem; }
+
+    .xadrez { height: 18px; background: repeating-conic-gradient(var(--xadrez) 0 25%, #FFF8EC 0 50%) 0 0 / 18px 18px; }
+    .secao { padding-block: 44px; }
+    .secao--creme { background: var(--creme); }
+    .secao--clara { background: var(--branco); }
+    .etiqueta { font-size: .95rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; text-align: center; color: var(--xadrez); }
+    .abre { padding-block: 22px 44px; background: var(--creme); }
+    .abre .caixa { gap: 14px; }
+    .abre__texto { text-align: center; font-size: 1.15rem; font-weight: 700; line-height: 1.45; }
+    .abre__texto strong { color: var(--xadrez); }
+
+    .livro { justify-self: center; width: 176px; padding-block: 6px 10px; animation: balanca 4s ease-in-out infinite; }
+    @media (min-width: 700px) { .livro { width: 220px; } }
+    .livro img { width: 100%; border-radius: 4px 10px 10px 4px; transform: perspective(900px) rotateY(-16deg); box-shadow: 16px 16px 26px rgba(59, 36, 22, .35); }
+    @keyframes balanca { 50% { transform: translateY(-8px) rotate(1.5deg); } }
+    .pilulas { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .pilulas li { padding: 6px 13px; background: #FEE2D5; border-radius: 999px; font-size: .98rem; font-weight: 800; white-space: nowrap; }
+
+    /* ── Decisão: aceitar, como é cobrado e o caminho pra recusar ── */
+    .decide { position: relative; display: grid; gap: 14px; margin-top: 6px;
+      /* cores e medidas que o script da Kiwify lê para pintar os botões dela */
+      --kiwify-upsell-accept-bg: var(--verde); --kiwify-upsell-accept-color: #fff; --kiwify-upsell-decline-color: var(--tinta-suave);
+      --kiwify-upsell-width: 100%; --kiwify-upsell-font: var(--f-texto); }
+    .decide > div:empty { display: none; }
+    .plano__acoes { display: grid; gap: 12px; }
+    .botao { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center; width: 100%; min-height: 68px; padding: 14px 20px; border: 0; border-radius: 999px; background: var(--verde); color: #fff; font-family: var(--f-texto); font-size: 1.2rem; font-weight: 900; line-height: 1.2; text-align: center; text-transform: uppercase; letter-spacing: .01em; cursor: pointer; box-shadow: 0 6px 0 var(--verde-escuro); -webkit-tap-highlight-color: transparent; }
+    .botao[disabled] { opacity: .6; cursor: wait; }
+    .botao::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--verde); opacity: 0; pointer-events: none; animation: anel 1.9s ease-out infinite; }
+    .botao[disabled]::before { animation: none; }
+    @keyframes anel { 0% { transform: scale(1); opacity: .55; } 70%, 100% { transform: scale(1.1, 1.5); opacity: 0; } }
+    .paga { text-align: center; font-size: 1.02rem; font-weight: 700; line-height: 1.4; color: var(--tinta-suave); }
+    .recusa { justify-self: center; min-height: 48px; padding: 12px 14px; border: 0; background: none; color: var(--tinta-suave); font-family: var(--f-texto); font-size: 1.05rem; font-weight: 800; line-height: 1.35; text-align: center; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .aviso { display: none; padding: 16px 18px; border: 3px dashed var(--ouro); border-radius: 16px; background: var(--branco); font-weight: 700; line-height: 1.45; text-align: center; }
+
+    /* O script da Kiwify impõe o visual dela nos dois botões (tudo com !important). Aqui a página retoma o seu.
+       NÃO mexer em display: é por ele que a Kiwify esconde os botões quando mostra o código Pix. */
+    .pg .decide[data-upsell-url] { padding: 0 !important; }
+    .pg .botao[id^="kiwify-upsell-trigger"] { max-width: none !important; min-height: 68px !important; padding: 16px 20px !important; border-radius: 999px !important; box-shadow: 0 6px 0 var(--verde-escuro) !important; font-size: 1.2rem !important; font-weight: 900 !important; line-height: 1.2 !important; letter-spacing: .01em !important; text-transform: uppercase !important; }
+    .pg .botao[id^="kiwify-upsell-trigger"]:focus-visible { outline: 3px solid #1F3358 !important; outline-offset: 3px !important; }
+    .pg .recusa[id^="kiwify-upsell-cancel-trigger"] { max-width: none !important; margin: 0 auto !important; padding: 12px 14px !important; font-size: 1.05rem !important; font-weight: 800 !important; line-height: 1.35 !important; }
+    .pg .kiwify-upsell-inline { margin-bottom: 0 !important; }
+    /* se a oferta só tiver pagamento de uma vez, a caixa de parcelas com uma opção só não precisa aparecer */
+    .pg .kiwify-upsell-inline-field:has(select > option:only-child) { display: none !important; }
+    @media (max-width: 359px) { .botao { font-size: 1.05rem; padding-inline: 14px; } .pg .botao[id^="kiwify-upsell-trigger"] { font-size: 1.05rem !important; padding-inline: 14px !important; } }
+
+    /* Os botões só aparecem depois que o script da Kiwify liga neles. Assim ninguém aperta um botão que ainda
+       não funciona, e nada muda de lugar debaixo do dedo (no cartão, o toque no botão verde já é a compra). */
+    .js .pg:not(.pronta) .decide > *, .js .pg:not(.pronta) .plano__acoes { visibility: hidden; }
+    .js .pg:not(.pronta) .decide { min-height: 250px; }
+    .js .pg:not(.pronta) .decide::before { content: "Abrindo a oferta..."; position: absolute; inset: 40px 0 auto; text-align: center; font-weight: 800; color: var(--tinta-suave); }
+    .pronta .decide, .pronta .plano__acoes { animation: surge .3s ease both; }
+    @keyframes surge { from { opacity: 0; } }
+
+    /* se o script da Kiwify não abrir, some a compra e fica só o caminho pro caderninho */
+    .pg.sem-oferta .botao, .pg.sem-oferta .paga, .pg.sem-oferta .kiwify-upsell-inline { display: none !important; }
+    .sem-oferta .aviso { display: block; }
+    .sem-oferta .recusa { min-height: 60px; padding: 14px 22px; border-radius: 999px; background: var(--verde); color: #fff; text-decoration: none; text-transform: uppercase; box-shadow: 0 6px 0 var(--verde-escuro); }
+
+    /* capítulos */
+    .capitulos { display: grid; gap: 10px; counter-reset: cap; }
+    .capitulos li { counter-increment: cap; position: relative; display: grid; gap: 2px; min-height: 64px; padding: 12px 14px 12px 62px; border-radius: 16px; background: var(--creme); line-height: 1.3; }
+    .capitulos li::before { content: counter(cap); position: absolute; left: 12px; top: 50%; display: grid; place-content: center; width: 38px; height: 38px; margin-top: -19px; border-radius: 50%; background: var(--xadrez); color: #fff; font-family: var(--f-titulo); font-weight: 800; font-size: 1.15rem; line-height: 1; }
+    .capitulos strong { color: var(--tinta); }
+    .capitulos span { font-size: 1.02rem; color: var(--tinta-suave); }
+
+    .lista-ok { display: grid; gap: 10px; }
+    .lista-ok li { position: relative; padding: 12px 14px 12px 46px; border-radius: 14px; background: var(--branco); line-height: 1.35; }
+    .lista-ok li::before { content: ""; position: absolute; left: 14px; top: 1.05em; width: 15px; height: 8px; border-left: 4px solid var(--verde); border-bottom: 4px solid var(--verde); transform: rotate(-45deg); }
+    .lista-ok strong { color: var(--xadrez); }
+    .tambem { padding: 14px 16px; border: 3px dashed var(--ouro); border-radius: 14px; font-size: 1.08rem; font-weight: 700; text-align: center; }
+    .carta { position: relative; display: grid; gap: 10px; margin-top: 22px; padding: 34px 20px 22px; border-radius: 24px; background: var(--branco); box-shadow: 0 8px 0 var(--ouro); font-size: 1.22rem; line-height: 1.6; }
+    .carta::before { content: "\201C"; position: absolute; top: -24px; left: 16px; font-family: var(--f-titulo); font-weight: 800; font-size: 5.4rem; line-height: 1; color: var(--ouro); }
+    .carta__assina { text-align: right; font-family: var(--f-titulo); font-weight: 800; color: var(--xadrez); }
+
+    /* fechamento */
+    .plano { display: grid; gap: 12px; padding: 26px 20px; background: #FFFBEA; border: 4px solid var(--verde); box-shadow: 0 14px 0 var(--verde-escuro); text-align: center; }
+    .plano h2 { font-size: 1.7rem; color: var(--verde-escuro); }
+    .preco { font-size: clamp(3.2rem, 2rem + 7vw, 4rem); font-weight: 900; line-height: 1; color: var(--verde); }
+    .preco__nota { margin-top: -4px; font-size: 1rem; font-weight: 700; color: var(--tinta-suave); }
+    .rodape { padding-block: 26px 34px; background: #23140B; color: #D8C6B2; font-size: .9rem; text-align: center; }
+    .rodape b { display: block; margin-bottom: 4px; font-family: var(--f-titulo); font-weight: 800; font-size: 1.3rem; color: #FFF8EC; }
+
+    @media (prefers-reduced-motion: reduce) { .livro, .botao::before, .pronta .decide, .pronta .plano__acoes { animation: none; } }
+  </style>
+</head>
+<body>
+<div class="pg">
+
+  <div class="certo">
+    <div class="caixa certo__in">
+      <span class="certo__ok" aria-hidden="true"></span>
+      <p><strong>Tua compra deu certo, minha filha.</strong> O caderninho já é teu e o acesso chega no teu e-mail.</p>
+    </div>
+  </div>
+
+  <main>
+    <!-- ───────── Oferta ───────── -->
+    <section class="abre">
+      <div class="caixa">
+        <p class="etiqueta">Antes de tu ir pro caderninho</p>
+        <h1>O que muda a comida de todo dia é o <em>molho</em>.</h1>
+        <div class="livro">
+          <img src="assets/img/capa-molhos-520.webp" srcset="assets/img/capa-molhos-320.webp 320w, assets/img/capa-molhos-520.webp 520w" sizes="(min-width: 700px) 220px, 176px" width="520" height="693" alt="Capa do caderno 100 Molhos Caseiros da Dona Sebastiana" fetchpriority="high">
+        </div>
+        <p class="abre__texto">Juntei num caderno só os <strong>100 molhos</strong> que eu faço em casa, do sugo da nona à calda de domingo. Tu leva junto agora por <strong>R$ 9,90</strong>.</p>
+
+        <!-- BLOCO DA KIWIFY (Gerador de upsell do produto 100 Molhos, oferta Bt4Z2MG).
+             O script dela procura estes três ids. Ela põe a escolha de parcelas (cartão) ou o código Pix logo antes do botão verde. -->
+        <div class="decide" id="kiwify-upsell-Bt4Z2MG" data-upsell-url="" data-downsell-url="">
+          <p class="aviso">Não consegui abrir a oferta dos molhos agora. Fica tranquila: teu caderninho está garantido e o acesso chega no teu e-mail.</p>
+          <button class="botao" type="button" id="kiwify-upsell-trigger-Bt4Z2MG">Sim, quero os 100 molhos · R$ 9,90</button>
+          <p class="paga" data-paga="cima">No cartão, o botão já faz a compra no mesmo cartão do caderninho. No Pix, aparece um código novo de R$ 9,90.</p>
+          <button class="recusa" type="button" id="kiwify-upsell-cancel-trigger-Bt4Z2MG">Não quero os molhos. Ir pro meu caderninho</button>
+          <!-- só aparece depois que a Kiwify troca os botões pelo código Pix: é a saída de quem desistiu de pagar -->
+          <button class="recusa" type="button" data-sair hidden>Mudei de ideia. Ir pro meu caderninho</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="xadrez" aria-hidden="true"></div>
+
+    <!-- ───────── O que tem dentro ───────── -->
+    <section class="secao secao--clara">
+      <div class="caixa">
+        <h2>O que tem no caderno dos molhos</h2>
+        <ul class="pilulas">
+          <li>100 molhos</li>
+          <li>124 páginas</li>
+          <li>Lê no celular</li>
+        </ul>
+        <ol class="capitulos">
+          <li><strong>Molhos vermelhos e de tomate</strong><span>sugo da nona, molho de linguiça colonial, ragu de cordeiro</span></li>
+          <li><strong>Molhos brancos e cremosos</strong><span>queijo colonial, quatro queijos, nata com cebola</span></li>
+          <li><strong>Molhos pra churrasco e carnes</strong><span>barbecue de tomate e mel, manteiga de alho pra picanha, molho madeira</span></li>
+          <li><strong>Molhos de massa da nona</strong><span>pesto de manjericão com pinhão, carbonara, molho de sardinha da nona</span></li>
+          <li><strong>Maioneses e molhos frios</strong><span>maionese de alho, maionese verde, molho rosé</span></li>
+          <li><strong>Vinagretes e molhos de salada</strong><span>vinagrete de pinhão, mel e limão, balsâmico</span></li>
+          <li><strong>Pimentas e molhos picantes</strong><span>pimenta no azeite, chimichurri vermelho, pimenta biquinho agridoce</span></li>
+          <li><strong>Molhos verdes e de ervas</strong><span>molho verde de agrião, pesto de rúcula, cebolinha com nata</span></li>
+          <li><strong>Molhos agridoces e de frutas</strong><span>goiaba pra carnes, pêssego pra frango, maracujá pra peixe</span></li>
+          <li><strong>Caldas e molhos doces</strong><span>calda de doce de leite, ganache de chocolate, calda de goiabada</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────── Como é cada receita ───────── -->
+    <section class="secao secao--creme">
+      <div class="caixa">
+        <h2>Em cada molho, a vó escreveu</h2>
+        <ul class="lista-ok">
+          <li><strong>O segredo da vó:</strong> o porquê de cada passo.</li>
+          <li><strong>O erro comum:</strong> aquilo que todo mundo faz e estraga o molho.</li>
+          <li><strong>Com o que combina:</strong> pra tu saber em que prato usar.</li>
+          <li><strong>Como guardar:</strong> quanto dura na geladeira e se pode congelar.</li>
+        </ul>
+        <p class="tambem">No fim tem a lista <strong>Qual molho pra qual prato</strong> e o índice de A a Z. No começo, os 4 jeitos de engrossar um molho e como esterilizar os vidros.</p>
+        <blockquote class="carta">
+          <p>Um molho bem feito transforma um prato do dia a dia em comida de família, daquela que faz todo mundo ficar mais um pouco na mesa.</p>
+          <p class="carta__assina">Vó Sebastiana</p>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ───────── Fechamento ───────── -->
+    <section class="secao secao--clara" data-fecho>
+      <div class="caixa">
+        <div class="plano">
+          <h2>100 Molhos Caseiros da Dona Sebastiana</h2>
+          <p class="preco">R$ 9,90</p>
+          <p class="preco__nota">pagamento único · 7 dias de garantia</p>
+          <p class="aviso">Não consegui abrir a oferta dos molhos agora. Fica tranquila: teu caderninho está garantido e o acesso chega no teu e-mail.</p>
+          <!-- estes dois repetem os botões de cima (ver o script no fim da página) -->
+          <div class="plano__acoes">
+            <button class="botao" type="button" data-aceitar>Sim, quero os 100 molhos</button>
+            <p class="paga" data-paga="baixo">No cartão, o botão já faz a compra no mesmo cartão do caderninho. No Pix, aparece um código novo de R$ 9,90.</p>
+            <button class="recusa" type="button" data-recusar>Não quero os molhos. Ir pro meu caderninho</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="caixa">
+      <p><b>Dona Sebastiana</b>© 2026 Dona Sebastiana</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* Apoio aos botões da Kiwify. Quem cobra, gera o Pix e leva pro caderninho é o script dela, logo abaixo. */
+(function () {
+  var pg = document.querySelector(".pg");
+  var decide = document.querySelector(".decide");
+  var fecho = document.querySelector("[data-fecho]");
+  var aceitar = document.querySelector('[id^="kiwify-upsell-trigger"]');
+  var recusar = document.querySelector('[id^="kiwify-upsell-cancel-trigger"]');
+  var copiasAceitar = document.querySelectorAll("[data-aceitar]");
+  var copiasRecusar = document.querySelectorAll("[data-recusar]");
+  function cada(lista, fn) { for (var i = 0; i < lista.length; i++) fn(lista[i], i); }
+
+  // O que a Kiwify põe no endereço depois da compra
+  var q = {};
+  try { new URLSearchParams(location.search).forEach(function (valor, chave) { q[chave] = valor; }); } catch (e) {}
+  var senha = q.code_senha && q.code_senha !== "undefined" ? q.code_senha : "";
+  var pix = q.payment_type === "pix" || q.payment_type === "automaticpix";
+
+  var sair = document.querySelector("[data-sair]");
+  var MEMBROS = "https://dashboard.kiwify.com.br/student/password/";   // mesmo destino que o script da Kiwify usa
+  function irProCaderninho() { if (senha) location.href = MEMBROS + encodeURIComponent(senha); }
+
+  // 1. Cartão: a Kiwify põe uma caixa de parcelas em cima do botão e deixa escolhido o maior parcelamento
+  //    (2x de R$ 5,22, com juros). A página anuncia R$ 9,90, então deixa escolhido o pagamento de uma vez.
+  //    A pessoa continua podendo trocar pra parcelado na caixa.
+  function parcelas() { return decide.querySelector('select[id^="kiwify-upsell-inline-installments"]'); }
+  function aVista() {
+    var s = parcelas();
+    if (!s || s.getAttribute("data-vista")) return;
+    s.setAttribute("data-vista", "1");
+    if (s.value !== "1" && s.querySelector('option[value="1"]')) {
+      s.value = "1";
+      try { s.dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {}
+    }
+  }
+  function deUmaVez() { var s = parcelas(); return !s || s.value === "1"; }
+
+  // 2. Explica a cobrança do jeito que a pessoa pagou o caderninho
+  function notas() {
+    if (!q.token) return;
+    var s = parcelas(), cima, baixo;
+    if (pix) cima = baixo = "Como tu pagou no Pix, aparece aqui um código Pix novo de R$ 9,90 pra tu pagar.";
+    else {
+      cima = "Apertou o botão, a compra vai no mesmo cartão do caderninho, sem digitar nada de novo." + (s && s.options.length > 1 ? " Logo acima tu escolhe se paga de uma vez ou parcelado." : "");
+      baixo = "Apertou o botão, os R$ 9,90 vão no mesmo cartão do caderninho, sem digitar nada de novo.";
+    }
+    cada(document.querySelectorAll("[data-paga]"), function (p) {
+      var t = p.getAttribute("data-paga") === "baixo" ? baixo : cima;
+      if (p.textContent !== t) p.textContent = t;
+    });
+  }
+  notas();
+
+  // 3. Os botões de baixo repetem os de cima. A Kiwify só liga um botão por oferta e mostra as parcelas
+  //    ou o Pix ao lado dele, então a página sobe até lá antes de acionar. No cartão, o de baixo só compra
+  //    direto se estiver escolhido o pagamento de uma vez (é o preço que o cartão de baixo mostra).
+  function subir() {
+    var calmo = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    try { decide.scrollIntoView({ block: "center", behavior: calmo ? "auto" : "smooth" }); } catch (e) { decide.scrollIntoView(); }
+  }
+  function livre() { return !aceitar.disabled && !aceitar.classList.contains("kiwify-upsell-hidden"); }
+  cada(copiasAceitar, function (b) { b.addEventListener("click", function () { subir(); if (livre() && (pix || deUmaVez())) aceitar.click(); }); });
+  cada(copiasRecusar, function (b) { b.addEventListener("click", function () { if (!senha) subir(); recusar.click(); }); });
+
+  // 4. O botão de baixo acompanha o de cima: "Processando..." enquanto a Kiwify cobra. Quando ela troca os
+  //    botões pelo código Pix (ou pelo agradecimento), o fechamento some e aparece a saída de quem desistiu.
+  var rotulos = [];
+  cada(copiasAceitar, function (b) { rotulos.push(b.textContent); });
+  function espelhar() {
+    var sumiu = aceitar.classList.contains("kiwify-upsell-hidden");
+    var ocupado = aceitar.disabled || aceitar.classList.contains("kiwify-upsell-busy");
+    if (fecho) fecho.hidden = sumiu;
+    if (sair) sair.hidden = !(sumiu && senha);
+    cada(copiasAceitar, function (b, i) { b.disabled = ocupado; b.textContent = ocupado ? "Processando..." : rotulos[i]; });
+  }
+  if (sair) sair.addEventListener("click", function () { sair.textContent = "Te levando pro teu caderninho..."; irProCaderninho(); });
+
+  // 5. Avisa que está indo (a Kiwify leva um segundinho pra trocar de página)
+  recusar.addEventListener("click", function () {
+    if (!senha) return;
+    recusar.textContent = "Te levando pro teu caderninho...";
+    cada(copiasRecusar, function (b) { b.textContent = "Te levando pro teu caderninho..."; });
+  });
+
+  // 6. Os botões só aparecem quando o script da Kiwify ligou neles e, no cartão, quando as parcelas já
+  //    carregaram (espera no máximo 3 segundos por elas). Se o script não carregar, ninguém fica preso:
+  //    some a oferta e o botão leva direto pro caderninho.
+  var chegou = false;
+  function parcelasProntas() {
+    var bloco = decide.querySelector(".kiwify-upsell-inline");
+    if (!bloco) return true;                                                  // Pix: não tem caixa de parcelas
+    if (bloco.querySelector(".kiwify-upsell-inline-select-loading")) return false;
+    return !!bloco.querySelector("select, .kiwify-upsell-inline-error, .kiwify-upsell-inline-price");
+  }
+  function acompanhar() {
+    aVista(); notas(); espelhar();
+    if (chegou && !pg.classList.contains("pronta") && parcelasProntas()) pg.classList.add("pronta");
+  }
+  if (window.MutationObserver) new MutationObserver(acompanhar).observe(decide, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "disabled"] });
+  window.semKiwify = function () {
+    if (pg.classList.contains("sem-oferta") || pg.classList.contains("pronta")) return;
+    pg.classList.add("sem-oferta", "pronta");
+    var todos = [recusar];
+    cada(copiasRecusar, function (b) { todos.push(b); });
+    cada(todos, function (b) { if (senha) b.textContent = "Ir pro meu caderninho"; else b.hidden = true; });
+    recusar.onclick = irProCaderninho;
+  };
+  window.kiwifyChegou = function () {
+    if (typeof aceitar.onclick !== "function") return window.semKiwify();
+    if (chegou) return;
+    chegou = true;
+    acompanhar();
+    setTimeout(function () { pg.classList.add("pronta"); }, 3000);
+  };
+  window.addEventListener("load", window.kiwifyChegou);
+  setTimeout(function () { if (!chegou) window.semKiwify(); }, 10000);
+})();
+</script>
+<!-- Script do upsell da Kiwify (o mesmo endereço que o Gerador de upsell entrega). Fica no fim, depois dos botões. -->
+<script src="https://snippets.kiwify.com/upsell-v2/upsell.min.js" onload="window.kiwifyChegou && window.kiwifyChegou()" onerror="window.semKiwify && window.semKiwify()"></script>
+</body>
+</html>
